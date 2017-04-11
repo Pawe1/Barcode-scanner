@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{2CA59BCF-121B-465F-8EFB-C9134345B31C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Plug\Plug.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Scanner\Scanner.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Plug">
+        <MSBuild Projects="Plug\Plug.dproj"/>
+    </Target>
+    <Target Name="Plug:Clean">
+        <MSBuild Projects="Plug\Plug.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Plug:Make">
+        <MSBuild Projects="Plug\Plug.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Scanner">
+        <MSBuild Projects="Scanner\Scanner.dproj"/>
+    </Target>
+    <Target Name="Scanner:Clean">
+        <MSBuild Projects="Scanner\Scanner.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Scanner:Make">
+        <MSBuild Projects="Scanner\Scanner.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Plug;Scanner"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Plug:Clean;Scanner:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Plug:Make;Scanner:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
